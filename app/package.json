@@ -1,0 +1,20 @@
+{
+  "name": "doomsdayengine",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Tee-Mou/DoomsdayEngine#readme",
+  "bugs": {
+    "url": "https://github.com/Tee-Mou/DoomsdayEngine/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tee-Mou/DoomsdayEngine.git"
+  },
+  "license": "ISC",
+  "author": "Tee-Mou",
+  "type": "commonjs",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest"
+  }
+}
