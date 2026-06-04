@@ -1,4 +1,5 @@
 import { BrowserWindow } from 'electron'
+var path = require("path")
 
 export default class Main {
     static mainWindow: Electron.BrowserWindow | null;
@@ -16,9 +17,14 @@ export default class Main {
     }
 
     private static onReady() {
-        Main.mainWindow = new Main.BrowserWindow({width: 800, height: 600});
+        Main.mainWindow = new Main.BrowserWindow({
+            width: 800, 
+            height: 600,
+            titleBarStyle: "hidden",
+            ...(process.platform !== 'darwin' ? { titleBarOverlay: true } :{})
+        });
         Main.mainWindow!
-            .loadURL('file://'+__dirname+'/index.html')
+            .loadURL(__dirname+'/../index.html')
         Main.mainWindow!.on('closed', Main.onClose);
     }
 

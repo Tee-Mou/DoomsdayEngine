@@ -1,0 +1,30 @@
+<!DOCTYPE html> 
+
+<html>
+    <head> 
+        <title> DOOMSDAY ENGINE</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body id="screen-container">
+        <div class="titlebar"> DOOMSDAY </div>
+        <div class="engine-ui">
+            <div id="board">BOARD</div>
+            <div id="tools">
+                <form id="fen-tools">
+                    <input id="fen-text", type="text", pattern="[a-zA-Z0-9/]+">
+                    <input id="fen-button", type="button">
+                </form>
+                <form id="analysis-tools">
+                    <input id="analysis-depth-input", type="text", pattern="[a-zA-Z0-9/]+">
+                    <input id="analyse-button", type="button">
+                    <output id="analysis-score">SCORE:</output>
+                    <output id="analysis-line">BEST LINE:</output>
+                </form>
+                <div id="perft-tools">
+                    <input id="perft-depth-input", type="text", pattern="[a-zA-Z0-9/]+">
+                    <input id="perft-button", type="button">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
