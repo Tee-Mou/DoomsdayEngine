@@ -67,3 +67,9 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# ts build folder
+dist
+
+# node dependencies
+node_modules

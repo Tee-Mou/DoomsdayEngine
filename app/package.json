@@ -13,8 +13,14 @@
   "license": "ISC",
   "author": "Tee-Mou",
   "type": "commonjs",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
+    "start": "electron .",
     "test": "jest"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.4.38",
+    "typescript": "^6.0.3"
   }
 }
