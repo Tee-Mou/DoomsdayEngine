@@ -1,0 +1,18 @@
+{
+    "appId": "com.teemou.DoomsDay",
+    "files": ["dist-electron", "dist-react"],
+    "icon": "./src/ui/assets/hero.png",
+    "mac": {
+        "target": "dmg"
+    },
+    "linux": {
+        "target": "AppImage",
+        "category": "Utility"
+    },
+    "win": {
+        "target": ["portable", "msi"]
+    },
+    "msi": {
+        "additionalLightArgs": ["-sval"]
+    }
+}

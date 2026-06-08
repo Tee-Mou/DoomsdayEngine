@@ -1,0 +1,25 @@
+.Row {
+    height: 12.5%;
+    display: flex;
+}
+
+.Square {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    text-align: left;
+}
+
+.LightSquare {
+    display: inline;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+
+    background: #f9dec9;
+}
+.DarkSquare {
+    display: inline;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    background: #60492c;
+}
