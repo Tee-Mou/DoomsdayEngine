@@ -10,7 +10,6 @@ function App() {
   return (
     <>
       <div id="screen-container">
-        <div className="titlebar"> DOOMSDAY </div>
         <div className="engine-ui">
           <Board/>
           <div id="tools">
