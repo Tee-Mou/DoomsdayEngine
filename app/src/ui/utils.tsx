@@ -1,7 +1,6 @@
 interface IHash {
     [pieceID : string] : number;
 }
-let pieces: string[] = ["♔" ,"♕" ,"♖" ,"♗" ,"♘" ,"♙" ,"♚" ,"♛" ,"♜" ,"♝" ,"♞" ,"♟", " "]
 
 export function FenToArray (fen: string) : number[][] {
     /**
@@ -31,7 +30,6 @@ export function FenToArray (fen: string) : number[][] {
     let rowIdx: number = 7;
     let colIdx: number = 0;
     while (idx < n) {
-        console.log(fen[idx]);
         let pieceIdx: number = FenLookup[fen[idx]];
         let charCode: number = fen.charCodeAt(idx);
         
@@ -43,18 +41,20 @@ export function FenToArray (fen: string) : number[][] {
 
         // Increment square if fen character is a number.
         else if (49 <= charCode && charCode <= 56) {
-            console.log("Found Number");
             colIdx = (colIdx + charCode) % 8;
         }
         
         // If character is '/', decrement the row ID.
         else if (charCode === 47) {
-            console.log("Found /");
             rowIdx -= 1;
         }
 
+        // If character is ' ', we have reached the
+        // end of piece description.
+        else if (charCode === 32) {
+            break;
+        }
         idx += 1;
     }
-    console.log(pieceRows)
     return pieceRows;
 }

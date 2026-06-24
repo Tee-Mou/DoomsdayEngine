@@ -7,9 +7,8 @@ import Board from './Board';
 import { FenToArray } from "./utils"
 
 function App() {
-  let currentFen: string = "1r6/5pp1/R1R4p/1r1pP3/2pkQPP1/7P/1P6/2K5";
+  let currentFen: string = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
   let pieceids: number[][] = FenToArray(currentFen);
-  console.log(pieceids)
   return (
     <>
       <div id="screen-container">
