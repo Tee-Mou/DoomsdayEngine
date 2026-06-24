@@ -1,0 +1,45 @@
+.Square {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    text-align: left;
+    color: ghostwhite;
+    outline-color: black;
+    outline-width: 10pt;
+}
+
+.LightSquare {
+    display: inline;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+
+    color: #9b8264;
+    background: #f9dec9;
+}
+
+.DarkSquare {
+    display: inline;
+    aspect-ratio: 1 / 1;
+    height: 100%;
+
+    color: #f9dec9;
+    background: #9b8264;
+}
+
+.LocationContainer {
+    padding-left: 3px;
+    padding-right: 3px;
+    height: 24px;
+}
+
+.PieceContainer {
+    height: calc(100% - 48px);
+
+    line-height: calc(100% - 48px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 60px;
+    color: black;
+}

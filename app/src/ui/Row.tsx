@@ -1,47 +1,39 @@
 import "./Row.css"
+import { Square } from './Square';
 
 interface RowProps {
     rankNumber: number;
-}
-
-interface SquareProps {
-    rankNumber: number;
-    fileNumber: number;
-}
-
-function Square(props: SquareProps) {
-    let fileLetter: string = String.fromCharCode(props.fileNumber + 96)
-
-    let squareColour: string = (
-        props.rankNumber + props.fileNumber
-    ) % 2 === 1 ? "LightSquare" : "DarkSquare";
-
-    return (
-        <div className="Square">
-            <div className={squareColour}>{fileLetter}{props.rankNumber}</div>
-        </div>
-    )
+    rowPieces: number[];
 }
 
 function Row(props: RowProps) {
+    
     return (
         <div className="Row">
             <Square rankNumber={props.rankNumber}
-                    fileNumber={1}/>
+                    fileNumber={1}
+                    piece={props.rowPieces[0]}/>
             <Square rankNumber={props.rankNumber}
-                fileNumber={2}/>
+                    fileNumber={2}
+                    piece={props.rowPieces[1]}/>
             <Square rankNumber={props.rankNumber}
-                fileNumber={3}/>
+                    fileNumber={3}
+                    piece={props.rowPieces[2]}/>
             <Square rankNumber={props.rankNumber}
-                fileNumber={4}/>
+                    fileNumber={4}
+                    piece={props.rowPieces[3]}/>
             <Square rankNumber={props.rankNumber}
-                fileNumber={5}/>
+                    fileNumber={5}
+                    piece={props.rowPieces[4]}/>
             <Square rankNumber={props.rankNumber}
-                fileNumber={6}/>
+                   fileNumber={6}
+                    piece={props.rowPieces[5]}/>
             <Square rankNumber={props.rankNumber}
-                fileNumber={7}/>
+                    fileNumber={7}
+                    piece={props.rowPieces[6]}/>
             <Square rankNumber={props.rankNumber}
-                fileNumber={8}/>
+                    fileNumber={8}
+                    piece={props.rowPieces[7]}/>
         </div>
     )
 }

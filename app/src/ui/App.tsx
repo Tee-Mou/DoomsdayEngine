@@ -4,14 +4,17 @@ import viteLogo from './assets/vite.svg';
 import heroImg from './assets/hero.png';
 import './App.css';
 import Board from './Board';
+import { FenToArray } from "./utils"
 
 function App() {
-
+  let currentFen: string = "1r6/5pp1/R1R4p/1r1pP3/2pkQPP1/7P/1P6/2K5";
+  let pieceids: number[][] = FenToArray(currentFen);
+  console.log(pieceids)
   return (
     <>
       <div id="screen-container">
         <div className="engine-ui">
-          <Board/>
+          <Board pieceIDs={pieceids}/>
           <div id="tools">
             <form id="fen-tools">
                 <input id="fen-text" type="text" pattern="[a-zA-Z0-9/]+"></input>
