@@ -1,26 +1,21 @@
-.Square {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    text-align: left;
-    color: ghostwhite;
-    outline-color: black;
-    outline-width: 10pt;
-}
-
 .LightSquare {
-    display: inline;
-    aspect-ratio: 1 / 1;
-    height: 100%;
+    --boardheight: min(calc(100vh - 60px), calc(100vw - 360px));
+    width: var(--boardheight) / 8;
+    aspect-ratio: 1;
+
+    display: flex;
+    flex-direction: column;
 
     color: #9b8264;
     background: #f9dec9;
 }
 
 .DarkSquare {
-    display: inline;
-    aspect-ratio: 1 / 1;
-    height: 100%;
+    width: var(--boardheight) / 8;
+    aspect-ratio: 1;
+
+    display: flex;
+    flex-direction: column;
 
     color: #f9dec9;
     background: #9b8264;
@@ -29,17 +24,19 @@
 .LocationContainer {
     padding-left: 3px;
     padding-right: 3px;
-    height: 24px;
+    height: 16px;
+
+    text-align: left;
 }
 
 .PieceContainer {
-    height: calc(100% - 48px);
+    --linesize: calc(var(--boardheight) / 8 - 24px);
 
-    line-height: calc(100% - 48px);
     display: flex;
+    line-height: var(--linesize);
     justify-content: center;
     align-items: center;
 
-    font-size: 60px;
+    font-size: calc(var(--linesize) * 1);
     color: black;
 }

@@ -4,11 +4,12 @@
     
     margin: 0px;
     padding: 0px;
+    border: 0px;
 }
 
 #screen-container {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
 
     margin: 0px;
     padding: 0px;
@@ -16,15 +17,11 @@
 
 .engine-ui {
     --padding: 30px;
-    height: calc(100% - 2 * var(--padding) - 50px);
-    width: calc(100% - 2 * var(--padding));
+    height: calc(100vh - 2 * var(--padding));
+    width: calc(100vw - 2 * var(--padding));
 
     padding: var(--padding);
     margin: 0px;
-}
 
-#tools {
-    height: 100%;
-    min-width: 20%;
-    background-color: red;
+    overflow: hidden;
 }

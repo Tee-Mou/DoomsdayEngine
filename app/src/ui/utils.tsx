@@ -59,7 +59,6 @@ export function FenToArray (fen: string) : number[][] {
                     rowIdx -= 1;
                     colIdx = 0;
                     endOfRank = false;
-                    console.log("Found '/' " + endOfRank);
                 } else throw new FenParseError("Could not Parse the provided FEN string: Expected '/'")
             }
 
@@ -73,7 +72,6 @@ export function FenToArray (fen: string) : number[][] {
             // Increment square if fen character is a number.
             else if (49 <= charCode && charCode <= 56) {
                 colIdx = colIdx + (charCode - 48);
-                console.log(colIdx);
                 if (colIdx > 8) {
                     throw new FenParseError("Could not Parse the provided FEN string: Number '" + fen[idx] + "' is too large.");
                 } else if (colIdx === 8) endOfRank = true;

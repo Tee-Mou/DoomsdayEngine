@@ -1,0 +1,16 @@
+input:focus,
+button:focus {
+    outline: none;
+}
+
+
+#tools {
+    height: calc(100vh - 60px);
+    width: calc(100vw - 100vh);
+    background-color: red;
+
+    min-width: 300px;
+
+    float: right;
+    margin: 0px;
+}

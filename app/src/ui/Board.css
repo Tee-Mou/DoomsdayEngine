@@ -1,10 +1,12 @@
 
 #board {
-    height: 100%;
-    max-width: 70%;
-    aspect-ratio: 1 / 1;
-
+    height: calc(100vh - 60px);
+    aspect-ratio: 1;
     float: left;
     
+    max-height: calc(100vw - 360px);
+    max-width: calc(100vw - 360px);
+
     background-color: blue;
+    margin: 0px;
 }

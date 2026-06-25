@@ -1,4 +1,8 @@
 .Row {
-    height: 12.5%;
+    --boardheight: min(calc(100vh - 60px), calc(100vw - 360px));
+
+    height: calc(var(--boardheight) / 8);
+    width: var(--boardheight);
+
     display: flex;
 }

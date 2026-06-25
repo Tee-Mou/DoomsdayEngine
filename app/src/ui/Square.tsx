@@ -19,14 +19,12 @@ export function Square(props: SquareProps) {
     let pieceStr: string = pieces[props.piece]
 
     return (
-        <div className="Square">
-            <div className={squareColour}>
-                <div className="LocationContainer">
-                    {fileLetter}{props.rankNumber}
-                </div>
-                <div className="PieceContainer">
-                    {pieceStr}
-                </div>
+        <div className={squareColour}>
+            <div className="LocationContainer">
+                {fileLetter}{props.rankNumber}
+            </div>
+            <div className="PieceContainer">
+                {pieceStr}
             </div>
         </div>
     )
