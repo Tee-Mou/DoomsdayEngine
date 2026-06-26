@@ -1,0 +1,21 @@
+.console {
+    height: calc(50vh - 30px);
+    width: calc(100vw - 100vh - 30px);
+    min-width: 270px;
+
+    white-space: pre-wrap;
+    background-color: aliceblue;
+
+    display: flex;
+    flex-direction: column-reverse;
+
+    text-align: left;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: auto;
+    margin-bottom: 15px;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+}

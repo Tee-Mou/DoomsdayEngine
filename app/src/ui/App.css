@@ -23,5 +23,6 @@
     padding: var(--padding);
     margin: 0px;
 
+    background-color: #555;
     overflow: hidden;
 }

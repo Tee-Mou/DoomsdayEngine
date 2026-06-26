@@ -1,9 +1,14 @@
-import { useState, type SetStateAction, useRef } from 'react';
+import { type SetStateAction, useRef } from 'react';
 import "./Tools.css"
+import Console from "./Console"
 
 interface ToolsProps {
     currentFen: string;
     setCurrentFen: React.Dispatch<SetStateAction<string>>;
+    consoleOutput: string;
+    setConsoleOutput: React.Dispatch<SetStateAction<string>>;
+    renderedLastError: boolean;
+    setRenderedError: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export function Tools (props: ToolsProps) {
@@ -14,6 +19,7 @@ export function Tools (props: ToolsProps) {
     function handleFENForm (event: React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
         props.setCurrentFen(event.target.fen.value);
+        props.setRenderedError(false);
     }
     
     return (
@@ -33,6 +39,8 @@ export function Tools (props: ToolsProps) {
                 <input id="perft-depth-input" type="text" name = "pDepth" pattern="[a-zA-Z0-9/]+"></input>
                 <input id="perft-button" type="submit"></input>
             </form>
+            <Console consoleOutput={props.consoleOutput} setConsoleOutput={props.setConsoleOutput}>
+            </Console>
         </div>
     )
 }
