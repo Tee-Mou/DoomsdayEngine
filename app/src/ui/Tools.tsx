@@ -26,18 +26,18 @@ export function Tools (props: ToolsProps) {
         <div id="tools">
             <form id="fen-tools"
                   onSubmit={handleFENForm}>
-                <input id="fen-text" type="text" name="fen" pattern="[a-zA-Z0-9/]+"></input>
-                <input id="fen-button" type="submit"></input>
+                <input id="fen-text" type="text" name="fen" pattern="[a-zA-Z0-9/]+" placeholder="Enter FEN..."></input>
+                <input id="fen-button" type="submit" value="<>"></input>
             </form>
             <form id="analysis-tools">
-                <input id="analysis-depth-input" type="text" name="aDepth" pattern="[a-zA-Z0-9/]+"></input>
-                <input id="analyse-button" type="submit"></input>
+                <input id="analysis-depth-input" type="text" name="aDepth" pattern="[a-zA-Z0-9/]+" placeholder='Enter Depth...'></input>
+                <input id="analyse-button" type="submit" value="<>"></input>
                 <output id="analysis-score">SCORE:</output>
                 <output id="analysis-line">BEST LINE:</output>
             </form>
             <form id="perft-tools">
                 <input id="perft-depth-input" type="text" name = "pDepth" pattern="[a-zA-Z0-9/]+"></input>
-                <input id="perft-button" type="submit"></input>
+                <input id="perft-button" type="submit" value="<>"></input>
             </form>
             <Console consoleOutput={props.consoleOutput} setConsoleOutput={props.setConsoleOutput}>
             </Console>
