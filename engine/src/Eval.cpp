@@ -1,6 +1,6 @@
 #include "../inc/Eval.h"
 #include "../inc/Utils.h"
-#include <iostream>
+#include <cmath>
 
 namespace Engine {
 
@@ -39,7 +39,7 @@ u64 Eval::perft(int depth, bool recursion) {
         // }
         if (!recursion) {
             for (int i = 0; i < moveCount; i++) {
-                std::cout << squares[moves[i]->oldSquare] << squares[moves[i]->newSquare] << ": " << nodes << std::endl;
+                // std::cout << squares[moves[i]->oldSquare] << squares[moves[i]->newSquare] << ": " << nodes << std::endl;
             }
         }
         return (u64)moveCount;
@@ -53,9 +53,9 @@ u64 Eval::perft(int depth, bool recursion) {
         // std::cout << moves[i]->oldSquare << "|" << moves[i]->newSquare << std::endl;
         u64 next = perft(depth - 1, true);
         nodes += next;
-        if (!recursion) { std::cout << squares[moves[i]->oldSquare] << squares[moves[i]->newSquare] << ": " << nodes-prevNodes << std::endl; }
+        // if (!recursion) { std::cout << squares[moves[i]->oldSquare] << squares[moves[i]->newSquare] << ": " << nodes-prevNodes << std::endl; }
         unmakeMove(*moves[i]);
-        // if (depth == 2) { std::cout << nodes - prev << std::endl; }
+        // if (depth == 2) { std::cout << nodes - prevNodes << std::endl; }
     }
     return (u64)nodes;
 }
@@ -192,7 +192,7 @@ std::vector<Move*> Eval::findPieceMoves(Piece piece) {
                     }
                 };
             }
-            if (piece == PAWN && ((newSq > 55 & turn) || (newSq < 8 & !turn))) {
+            if (piece == PAWN && ((newSq > 55) & turn) || (newSq < 8) & !turn) {
                 for (int i = 2; i < 6; i++) {
                     int pPiece = i + !turn * 6;
                     Move* move = new Move(sq, newSq, pieceIndex, cPiece, pPiece); 

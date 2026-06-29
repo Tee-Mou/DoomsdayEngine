@@ -21,7 +21,7 @@ namespace Engine {
             std::vector<Move*> addCastleMoves(int piece);
 
             float evalPosition();
-            float evalAlphaBeta(int depth, float alpha, float beta);
+            float evalAlphaBeta(int depth, float alpha = -INFINITY, float beta=INFINITY);
 
             void makeMove(Move move);
             void unmakeMove(Move move);
@@ -37,6 +37,7 @@ namespace Engine {
             void undoFiftyClock();
 
             // setters
+            void setFen(str fen) { mGame->setFen(fen); }
             void addCastleToHistory(int rights) { mCastleHistory.push_back(rights); };
             void addEPToHistory(int epFiles) { mEPHistory.push_back(epFiles); };
             void addFiftyClockToHistory(int fiftyMoveClock) { mFiftyClockHistory.push_back(fiftyMoveClock); };

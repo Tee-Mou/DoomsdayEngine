@@ -5,7 +5,7 @@ using namespace Engine;
 int main() {
     Game* game = new Game();
     Eval* eval = new Eval(game);
-    Interface* interface = new Interface();
+    Interface* interface = new Interface(eval);
 
     interface->runInterface();
 
