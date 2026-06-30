@@ -204,7 +204,7 @@ namespace Engine {
         u64 moves = 0ULL;
         u64 rayMoves = 0ULL;
         u64 mask = getMask(sq, piece);
-        int f, r, i, j, fail;
+        int f, r, i, j;
         f = sq % 8;
         r = sq / 8;
         

@@ -1,4 +1,5 @@
 #include <vector>
+#include <cmath>
 #include "Move.h"
 #include "MoveTables.h"
 #include "Game.h"

@@ -1,6 +1,7 @@
 #include "../inc/Eval.h"
 #include "../inc/Utils.h"
 #include <cmath>
+#include <iostream>
 
 namespace Engine {
 
@@ -34,9 +35,9 @@ u64 Eval::perft(int depth, bool recursion) {
     int moveCount = moves.size();
     
     if (depth == 1) {
-        // for (int i = 0; i < moveCount; i++) {
-        //     { std::cout << "    " << moves[i]->oldSquare << "|" << moves[i]->newSquare << std::endl; }
-        // }
+        for (int i = 0; i < moveCount; i++) {
+            // { std::cout << "    " << moves[i]->oldSquare << "|" << moves[i]->newSquare << std::endl; }
+        }
         if (!recursion) {
             for (int i = 0; i < moveCount; i++) {
                 // std::cout << squares[moves[i]->oldSquare] << squares[moves[i]->newSquare] << ": " << nodes << std::endl;
@@ -53,7 +54,7 @@ u64 Eval::perft(int depth, bool recursion) {
         // std::cout << moves[i]->oldSquare << "|" << moves[i]->newSquare << std::endl;
         u64 next = perft(depth - 1, true);
         nodes += next;
-        // if (!recursion) { std::cout << squares[moves[i]->oldSquare] << squares[moves[i]->newSquare] << ": " << nodes-prevNodes << std::endl; }
+        if (!recursion) { std::cout << squares[moves[i]->oldSquare] << squares[moves[i]->newSquare] << ": " << nodes-prevNodes << std::endl; }
         unmakeMove(*moves[i]);
         // if (depth == 2) { std::cout << nodes - prevNodes << std::endl; }
     }

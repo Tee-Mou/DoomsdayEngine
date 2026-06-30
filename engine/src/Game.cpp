@@ -1,36 +1,15 @@
 #include <stdexcept>
+#include <cmath>
+#include <string>
+#include <vector>
 
 #include "../inc/Game.h"
+#include "../inc/Utils.h"
 
 namespace Engine {
     Game::Game (str fen) {
         setFen(fen);
     };
-
-    void Game::setFen(str fen) {
-        mFen = fen;
-        for (int i = 0; i < 15; i++) {
-            pieceLocations[i] = 0;
-        };
-
-        int endLocFen = fen.find(' ');
-        int endTurnFen = fen.find(' ', endLocFen + 1);
-        int endCastleFen = fen.find(' ', endTurnFen + 1);
-        int endEpFen = fen.find(' ', endCastleFen + 1);
-        int endFiftyMoveFen = fen.find(' ', endEpFen + 1);
-
-        str locFen = fen.substr(0, endLocFen);
-        str turnFen = fen.substr(endLocFen + 1, endTurnFen - (endLocFen + 1));
-        str castleFen = fen.substr(endTurnFen + 1, endCastleFen - (endTurnFen + 1));
-        str epFen = fen.substr(endCastleFen + 1, endEpFen - (endCastleFen + 1));
-        str fiftyMoveFen = fen.substr(endEpFen + 1, endFiftyMoveFen - (endEpFen + 1));
-        str moveFen = fen.substr(endFiftyMoveFen + 1, std::string::npos);
-        processPieceLocations(locFen);
-        processCastlingRights(castleFen);
-        processEnPassantFiles(epFen);
-        processCurrentTurn(turnFen, moveFen);
-        processFiftyMoveClock(fiftyMoveFen);
-    }
 
     void Game::processPieceLocations(str locFen) {
         int square = 56;
@@ -127,7 +106,7 @@ namespace Engine {
 
     void Game::processCurrentTurn(str turnFen, str moveFen) {
         halfMove = 0;
-        halfMove += ((int)moveFen[0] - 49) * 2;
+        halfMove += (std::stoi(moveFen) - 1) * 2;
         halfMove += (turnFen == "w" ? 0 : 1);
     }
 
@@ -138,4 +117,103 @@ namespace Engine {
             fiftyClock += ((int)fiftyMoveFen[length - (1 + i)] - 48) * pow(10, i);
         }
     }
+
+    void Game::setFen(str fen) {
+        mFen = fen;
+        for (int i = 0; i < 15; i++) {
+            pieceLocations[i] = 0;
+        };
+
+        int endLocFen = fen.find(' ');
+        int endTurnFen = fen.find(' ', endLocFen + 1);
+        int endCastleFen = fen.find(' ', endTurnFen + 1);
+        int endEpFen = fen.find(' ', endCastleFen + 1);
+        int endFiftyMoveFen = fen.find(' ', endEpFen + 1);
+
+        str locFen = fen.substr(0, endLocFen);
+        str turnFen = fen.substr(endLocFen + 1, endTurnFen - (endLocFen + 1));
+        str castleFen = fen.substr(endTurnFen + 1, endCastleFen - (endTurnFen + 1));
+        str epFen = fen.substr(endCastleFen + 1, endEpFen - (endCastleFen + 1));
+        str fiftyMoveFen = fen.substr(endEpFen + 1, endFiftyMoveFen - (endEpFen + 1));
+        str moveFen = fen.substr(endFiftyMoveFen + 1, std::string::npos);
+        processPieceLocations(locFen);
+        processCastlingRights(castleFen);
+        processEnPassantFiles(epFen);
+        processCurrentTurn(turnFen, moveFen);
+        processFiftyMoveClock(fiftyMoveFen);
+    }
+
+    str Game::calculateFEN() {
+        std::vector<char> pieceChar {
+            'K', 'P', 'N', 'B', 'R', 'Q',
+            'k', 'p', 'n', 'b', 'r', 'q'
+        };
+        str pieceStr = "";
+        u64* allBB = getBitboard(14);
+        int row = 7;
+        int col = 0;
+        int emptySquares = 0;
+        while (row >= 0) {
+            bool foundPiece = false;
+            int sq = row * 8 + col;
+            u64 sqBB = 1ULL << sq;
+            if (sqBB & *allBB) {
+                for (int i = 0; i < 12; i++) {
+                    u64* pieceBB = getBitboard(i);
+                    if (sqBB & *pieceBB) {
+                        foundPiece = true;
+                        if (emptySquares != 0) {
+                            pieceStr += std::to_string(emptySquares);
+                            emptySquares = 0;
+                        }
+                        pieceStr += pieceChar[i]; 
+                        break;
+                    }
+                }
+            }
+            if (!foundPiece) emptySquares++;
+            col++;
+            if (col == 8) {
+                if (emptySquares != 0) {
+                    pieceStr += std::to_string(emptySquares);
+                    emptySquares = 0;
+                }
+                if (row > 0) pieceStr += '/';
+                row -= 1; 
+                col = 0;
+            }
+        }
+
+        str turnStr = getTurn() ? "w" : "b";
+        str castlingStr = "";
+        int castleRights = getCastles();
+        if (castleRights == 0) castlingStr = "-";
+        else {
+            if (castleRights & 2) castlingStr += 'K';
+            if (castleRights & 1) castlingStr += 'Q';
+            if (castleRights & 8) castlingStr += 'k';
+            if (castleRights & 4) castlingStr += 'q';
+        }
+        str enPassantStr = "";
+        int epFile = getEPFiles();
+        if (epFile == 0) enPassantStr = "-";
+        else {
+            enPassantStr +=  (char)(Utils::ctz(epFile) + 97);
+            enPassantStr += (char)((getHalfMove() % 2 == 0) ? '6' : '3');
+        }
+        str fiftyMoveStr = std::to_string(getFiftyMoveClock());
+        str fullMoveStr = std::to_string((int)floor(getHalfMove() / 2) + 1);
+
+        str fenStr = (
+            pieceStr + " " + 
+            turnStr + " " + 
+            castlingStr + " " +
+            enPassantStr + " " +
+            fiftyMoveStr + " " +
+            fullMoveStr
+        );
+        
+        return fenStr;
+    }
+
 } //namespace Engine

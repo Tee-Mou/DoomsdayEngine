@@ -1,5 +1,4 @@
 #include <string>
-#include <cmath>
 
 #pragma once
 
@@ -29,6 +28,7 @@ class Game
         void processEnPassantFiles(str epFen);
         void processCurrentTurn(str turnFen, str moveFen);
         void processFiftyMoveClock(str fiftyMoveFen);
+        str calculateFEN();
         
         // getters
         str getFen() { return mFen; }
