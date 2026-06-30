@@ -1,5 +1,6 @@
 #include "../inc/Eval.h"
 #include "../inc/Utils.h"
+#include <algorithm>
 #include <cmath>
 #include <iostream>
 
@@ -33,14 +34,26 @@ u64 Eval::perft(int depth, bool recursion) {
     // std::cout << *getBoard()->getBitboard(4)<< std::endl;
     moves = findLegalMoves();
     int moveCount = moves.size();
+    std::sort(moves.begin(), moves.end(), [](const Move* L, Move* R) {
+        if (L->piece != R->piece) return L->piece < R->piece;
+        if (L->piece >= 6) {
+            int lCol = L->newSquare % 8;
+            int rCol = R->newSquare % 8;
+            int lRow = floor(L->newSquare / 8);
+            int rRow = floor(R->newSquare / 8);
+            if (lRow == rRow) return lCol < rCol;
+            return L->newSquare > R->newSquare;
+        }
+        return L->newSquare < R->newSquare;
+    });
     
     if (depth == 1) {
-        for (int i = 0; i < moveCount; i++) {
-            // { std::cout << "    " << moves[i]->oldSquare << "|" << moves[i]->newSquare << std::endl; }
-        }
+        // for (int i = 0; i < moveCount; i++) {
+            // { std::cout << "\t" << squares[moves[i]->oldSquare] << "|" << squares[moves[i]->newSquare] << std::endl; }
+        // }
         if (!recursion) {
             for (int i = 0; i < moveCount; i++) {
-                // std::cout << squares[moves[i]->oldSquare] << squares[moves[i]->newSquare] << ": " << nodes << std::endl;
+                std::cout << squares[moves[i]->oldSquare] << squares[moves[i]->newSquare] << ": " << nodes << std::endl;
             }
         }
         return (u64)moveCount;
@@ -51,7 +64,7 @@ u64 Eval::perft(int depth, bool recursion) {
         u64 prevNodes = nodes;
         u64 prevCaps = captures;
         makeMove(*moves[i]);
-        // std::cout << moves[i]->oldSquare << "|" << moves[i]->newSquare << std::endl;
+        // std::cout << squares[moves[i]->oldSquare] << "|" << squares[moves[i]->newSquare] << std::endl;
         u64 next = perft(depth - 1, true);
         nodes += next;
         if (!recursion) { std::cout << squares[moves[i]->oldSquare] << squares[moves[i]->newSquare] << ": " << nodes-prevNodes << std::endl; }

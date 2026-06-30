@@ -145,8 +145,8 @@ namespace Engine {
 
     str Game::calculateFEN() {
         std::vector<char> pieceChar {
-            'K', 'P', 'N', 'B', 'R', 'Q',
-            'k', 'p', 'n', 'b', 'r', 'q'
+            'K', 'P', 'B', 'N', 'R', 'Q',
+            'k', 'p', 'b', 'n', 'r', 'q'
         };
         str pieceStr = "";
         u64* allBB = getBitboard(14);
