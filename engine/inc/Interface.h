@@ -46,6 +46,7 @@ namespace Engine {
     
         private:
             Engine::Eval* eval;
+            bool verbose = false;
     };
     
 } // namespace Engine

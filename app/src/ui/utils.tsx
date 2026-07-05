@@ -103,5 +103,5 @@ export function log (
             message = "Debug: " + message;
             break;
     }
-    setConsoleOutput(consoleOutput + message + '\n');
+    setConsoleOutput(prev => prev + message + '\n');
 }

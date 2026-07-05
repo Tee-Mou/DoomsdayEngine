@@ -7,7 +7,6 @@ interface ConsoleProps {
 }
 
 function Console ( props: ConsoleProps ) {
-    console.log(props.consoleOutput)
     return (
         <div className='console'>
             <div className='content'>

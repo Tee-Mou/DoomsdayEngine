@@ -1,4 +1,5 @@
 #include "../inc/Interface.h"
+#include <cmath>
 #include <iostream>
 #include <ostream>
 #include <string>
@@ -17,7 +18,7 @@ namespace Engine {
         str input;
         str command = "";
         str arg = "";
-        std::cout << "# ";
+        if (verbose) std::cout << "# " << std::endl;
         std::getline(std::cin, input);
     
         int endCommand = input.find(' ');
@@ -34,22 +35,23 @@ namespace Engine {
         str arg = std::get<1>(input);
         bool commandValid = commandMap.count(command);
         if (!commandValid){
-            std::cout << "Unknown command: " << command << std::endl;
+            if (verbose) std::cout << "Unknown command: " << command << std::endl;
             return executeHelp("");
         }
         bool success = (this->*commandMap[command])(arg);
         if (success) {
-            std::cout << "Successfully executed " << command << " " << arg << std::endl;
+            if (verbose) std::cout << "Successfully executed " << command << " " << arg << std::endl;
             return true;
         }
         else {
-            std::cout << "Execution failed: " << command << " " << arg << std::endl;
+            std::cerr << "Execution failed: " << command << " " << arg << std::endl;
             return false;
         }
     }
     
     bool Interface::executeFEN(str arg) {
         eval->setFen(arg);
+        std::cout << "RESULT: " << eval->getBoard()->getFen() << std::endl;
         return true;
     }
     
@@ -78,7 +80,7 @@ namespace Engine {
             }
         }
         if (!found) {
-            std::cout << "Could not find legal move: " << arg << std::endl;
+            std::cerr << "Could not find legal move: " << arg << std::endl;
             return false;
         }
         eval->makeMove(*relevantMove);
@@ -91,13 +93,13 @@ namespace Engine {
     
     bool Interface::executePerft(str arg) {
         int depth = std::stoi(arg);
-        std::cout << eval->perft(depth) << std::endl; 
+        std::cout << "RESULT: " << eval->perft(depth) << std::endl; 
         return true;
     }
     
     bool Interface::executeAnalyse(str arg) {
         int depth = std::stoi(arg);
-        eval->evalAlphaBeta(depth);
+        std::cout << "RESULT: " << eval->evalAlphaBeta(depth) << std::endl;
         return true;
     }
     
